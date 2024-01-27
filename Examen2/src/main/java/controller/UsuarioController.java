@@ -12,7 +12,7 @@ import model.UsuarioPojo;
 import service.UsuarioService;
 
 @RestController
-@RequestMapping("/miapp/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;

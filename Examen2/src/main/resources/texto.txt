@@ -1,0 +1,3 @@
+1,clave1,tipo1,Nombre1,Username1,ApellidoPaterno1,ApellidoMaterno1,password1,tipoUsuario1,2022-01-26 12:30:00,2022-01-26 15:45:00,120,true
+2,clave2,tipo2,Nombre2,Username2,ApellidoPaterno2,ApellidoMaterno2,password2,tipoUsuario2,2022-01-27 08:45:00,2022-01-27 16:00:00,180,false
+3,clave3,tipo3,Nombre3,Username3,ApellidoPaterno3,ApellidoMaterno3,password3,tipoUsuario3,2022-01-28 09:15:00,2022-01-28 18:30:00,150,true

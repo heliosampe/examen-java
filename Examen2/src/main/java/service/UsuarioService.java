@@ -34,7 +34,7 @@ public class UsuarioService {
 	public void cargaDatosDesdeArchivo() {
 	try {
 		// Cargar el archivo desde el classpath
-        InputStream inputStream = resourceLoader.getResource("classpath:src/main/resources/texto.txt").getInputStream();
+        InputStream inputStream = resourceLoader.getResource("classpath:texto.txt").getInputStream();
         List<String> lines = IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
 
         usuarios = new ArrayList<>();
