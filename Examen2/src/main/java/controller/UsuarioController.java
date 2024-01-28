@@ -26,6 +26,8 @@ public class UsuarioController {
     @GetMapping("/exportar-json")
     public ResponseEntity<String> exportarUsuariosJson() {
         // Obtener la lista de usuarios desde el servicio
+    	
+    	System.out.println("Solicitud GET recibida en /usuarios/exportar-json");
         List<UsuarioPojo> usuarios = usuarioService.obtenerUsuarios();
 
         if (usuarios != null && !usuarios.isEmpty()) {

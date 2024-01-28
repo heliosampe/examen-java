@@ -42,7 +42,7 @@ public class UsuarioService {
         for (String line : lines) {
             // Dividir la línea por el delimitador (por ejemplo, coma)
             String[] campos = line.split(",");
-
+            System.out.println("Línea del archivo: " + line);
             // Crear una instancia de Usuario y asignar valores desde los campos
             UsuarioPojo usuarioPojo = new UsuarioPojo();
             usuarioPojo.setId(Long.parseLong(campos[0]));
@@ -68,7 +68,8 @@ public class UsuarioService {
             usuarioPojo.setTiempoEnLinea(campos[11]);
          // Asignar el campo 'estatus' como booleano
             usuarioPojo.setEstatus("1".equals(campos[12]));
-
+            System.out.println("Línea del archivo: " + line);
+            System.out.println("Nuevo usuario creado: " + usuarioPojo);
             usuarios.add(usuarioPojo);
         }
 
