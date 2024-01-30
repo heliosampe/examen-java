@@ -1,4 +1,4 @@
-package model;
+package com.helio.examen2.model;
 
 import java.time.LocalDateTime;
 

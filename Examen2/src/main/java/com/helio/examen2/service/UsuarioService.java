@@ -1,4 +1,4 @@
-package service;
+package com.helio.examen2.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import model.UsuarioPojo;
+import com.helio.examen2.model.UsuarioPojo;
 
 
 
@@ -34,7 +33,7 @@ public class UsuarioService {
 	public void cargaDatosDesdeArchivo() {
 	try {
 		// Cargar el archivo desde el classpath
-        InputStream inputStream = resourceLoader.getResource("classpath:texto.txt").getInputStream();
+        InputStream inputStream = resourceLoader.getResource("classpath:data/texto.txt").getInputStream();
         List<String> lines = IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
 
         usuarios = new ArrayList<>();

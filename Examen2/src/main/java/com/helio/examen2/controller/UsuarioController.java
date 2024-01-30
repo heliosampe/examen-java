@@ -1,4 +1,4 @@
-package controller;
+package com.helio.examen2.controller;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.UsuarioPojo;
-import service.UsuarioService;
+import com.helio.examen2.model.UsuarioPojo;
+import com.helio.examen2.service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
