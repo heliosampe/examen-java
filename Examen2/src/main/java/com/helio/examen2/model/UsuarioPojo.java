@@ -1,6 +1,7 @@
 package com.helio.examen2.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 public class UsuarioPojo {
 	private long id;
@@ -12,8 +13,8 @@ public class UsuarioPojo {
 	private String apellidoMaterno;
 	private String password;
 	private String tipoUsuario;
-	private LocalDateTime fechaInicioSesion;
-	private LocalDateTime fechaFinSesion;
+	private LocalDate fechaInicioSesion;
+	private LocalDate fechaFinSesion;
 	private String tiempoEnLinea;
 	private boolean estatus;
 
@@ -89,19 +90,19 @@ public class UsuarioPojo {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	public LocalDateTime getFechaInicioSesion() {
+	public LocalDate getFechaInicioSesion() {
 		return fechaInicioSesion;
 	}
 
-	public void setFechaInicioSesion(LocalDateTime fechaInicioSesion) {
+	public void setFechaInicioSesion(LocalDate fechaInicioSesion) {
 		this.fechaInicioSesion = fechaInicioSesion;
 	}
 
-	public LocalDateTime getFechaFinSesion() {
+	public LocalDate getFechaFinSesion() {
 		return fechaFinSesion;
 	}
 
-	public void setFechaFinSesion(LocalDateTime fechaFinSesion) {
+	public void setFechaFinSesion(LocalDate fechaFinSesion) {
 		this.fechaFinSesion = fechaFinSesion;
 	}
 
@@ -122,8 +123,8 @@ public class UsuarioPojo {
 	}
 
 	public UsuarioPojo(long id, String clave, String tipo, String nombre, String username, String apellidoPaterno,
-			String apellidoMaterno, String password, String tipoUsuario, LocalDateTime fechaInicioSesion,
-			LocalDateTime fechaFinSesion, String tiempoEnLinea, boolean estatus) {
+			String apellidoMaterno, String password, String tipoUsuario, LocalDate fechaInicioSesion,
+			LocalDate fechaFinSesion, String tiempoEnLinea, boolean estatus) {
 		super();
 		this.id = id;
 		this.clave = clave;

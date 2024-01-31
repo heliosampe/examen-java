@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.helio.examen2.model.UsuarioPojo;
 import com.helio.examen2.service.UsuarioService;
 
@@ -29,10 +31,16 @@ public class UsuarioController {
     	
     	System.out.println("Solicitud GET recibida en /usuarios/exportar-json");
         List<UsuarioPojo> usuarios = usuarioService.obtenerUsuarios();
+        // Crear un nuevo ObjectMapper y agregar el módulo
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
 
+        System.out.println(usuarios != null);
+        System.out.println(!usuarios.isEmpty());
+        
         if (usuarios != null && !usuarios.isEmpty()) {
-            // Llamar al método convertirUsuariosAJson con la lista de usuarios
-            String jsonUsuarios = usuarioService.convertirUsuariosAJson(usuarios);
+            // Llamar al método convertirUsuariosAJson con la lista de usuarios y el nuevo ObjectMapper
+            String jsonUsuarios = usuarioService.convertirUsuariosAJson(usuarios, objectMapper);
             return ResponseEntity.ok(jsonUsuarios);
         } else {
             // Manejar el caso en que la lista de usuarios está vacía o nula

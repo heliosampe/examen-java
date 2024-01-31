@@ -3,6 +3,7 @@ package com.helio.examen2.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.helio.examen2.model.UsuarioPojo;
 
 
@@ -30,10 +32,16 @@ public class UsuarioService {
 		this.resourceLoader = resourceLoader;
 		
 	}
-	public void cargaDatosDesdeArchivo() {
+	public List<UsuarioPojo> cargaDatosDesdeArchivo() {
+	
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.registerModule(new JavaTimeModule());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+		System.out.println(objectMapper);
 	try {
 		// Cargar el archivo desde el classpath
-        InputStream inputStream = resourceLoader.getResource("classpath:data/texto.txt").getInputStream();
+        InputStream inputStream = resourceLoader.getResource("classpath:static/data/texto.txt").getInputStream();
         List<String> lines = IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
 
         usuarios = new ArrayList<>();
@@ -54,19 +62,17 @@ public class UsuarioService {
             usuarioPojo.setPassword(campos[7]);
             usuarioPojo.setTipoUsuario(campos[8]);
             
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Ajusta el formato según tu archivo
-            LocalDateTime fechaInicioSesion = LocalDateTime.parse(campos[9], formatter);
-            
+            // Convertir la fecha usando el ObjectMapper proporcionado por el controlador
+            LocalDate fechaInicioSesion = LocalDate.parse(campos[9], formatter);
             usuarioPojo.setFechaInicioSesion(fechaInicioSesion);
-            
-            DateTimeFormatter formatterfin = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Ajusta el formato según tu archivo
-            LocalDateTime fechaFinSesion = LocalDateTime.parse(campos[10], formatterfin);
+
+            LocalDate fechaFinSesion = LocalDate.parse(campos[10], formatter);
             usuarioPojo.setFechaFinSesion(fechaFinSesion);
             
             
             usuarioPojo.setTiempoEnLinea(campos[11]);
          // Asignar el campo 'estatus' como booleano
-            usuarioPojo.setEstatus("1".equals(campos[12]));
+            usuarioPojo.setEstatus("true".equals(campos[12].toLowerCase()));
             System.out.println("Línea del archivo: " + line);
             System.out.println("Nuevo usuario creado: " + usuarioPojo);
             usuarios.add(usuarioPojo);
@@ -78,13 +84,14 @@ public class UsuarioService {
         e.printStackTrace(); // Manejar la excepción adecuadamente en producción
 	}
 	
+	return usuarios;
 	
 	
 	}
     // Exportar a Json
-    public String convertirUsuariosAJson(List<UsuarioPojo> usuarios) {
+    public String convertirUsuariosAJson(List<UsuarioPojo> usuarios, ObjectMapper objectMapper) {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
+          
             return objectMapper.writeValueAsString(usuarios);
         } catch (JsonProcessingException e) {
             e.printStackTrace(); // Manejar la excepción adecuadamente en producción
@@ -94,6 +101,7 @@ public class UsuarioService {
 
     // Método para obtener la lista de usuarios cargados desde el archivo
     public List<UsuarioPojo> obtenerUsuarios() {
-        return usuarios;
+    	List<UsuarioPojo> listita = this.cargaDatosDesdeArchivo();
+        return listita;
     }
 }
